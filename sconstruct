@@ -1,0 +1,35 @@
+def glob(dirs):
+	files = []
+	for dir in dirs:
+		files.append(Glob(dir + "/*.cxx"))
+	return files
+
+flags = [
+	"-std=c++2a",
+	"-Wall", "-Wextra", "-Wconversion", "-Wunreachable-code", "-Wuninitialized", "-pedantic-errors" , "-Wold-style-cast", "-Wno-error=unused-variable"
+]
+
+comp = [
+	"demo",
+	"json",
+]
+
+incl = ["."]
+
+libs = [
+	"-lsfml-graphics",
+	"-lsfml-window",
+	"-lsfml-system",
+]
+
+env = Environment(
+	CXX = "g++-10",
+	CXXFLAGS = flags,
+	CPPPATH = incl,
+	CPPDEFINES = [],
+	LIBS = libs,
+	LIBPATH = ".",
+	SCONS_CXX_STANDART="c++20",
+	CXXCOMSTR = "[Compiling] $TARGET",
+	LINKCOMSTR = "[Linking] $TARGET")
+env.Program('sjson', glob(comp))
