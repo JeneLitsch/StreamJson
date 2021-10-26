@@ -39,8 +39,13 @@ std::string json::readString(std::istream & in) {
 	std::stringstream ss;
 	while(true) {
 		if(in.eof()) throw std::runtime_error("Unterminated String");
-		if(match(in, '"')) break;
-		match(in, '\\');
+		if(in.peek() == '"') {
+			in.ignore();
+			break;
+		}
+		if(in.peek() == '\\') {
+			in.ignore();
+		}
 		ss << static_cast<char>(in.get());
 	}
 	return ss.str();
