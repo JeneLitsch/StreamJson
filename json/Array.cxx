@@ -3,9 +3,6 @@
 #include "Object.hxx"
 #include <iostream>
 
-json::Array::Array(std::istream & in) {
-	in >> *this;
-}
 
 void json::Array::readFromStream(std::istream & in) {
 	this->values.clear();
@@ -16,7 +13,8 @@ void json::Array::readFromStream(std::istream & in) {
 		return;
 	}
 	else while (true) {
-		std::unique_ptr<Value> && value = std::make_unique<Value>(in);
+		std::unique_ptr<Value> && value = std::make_unique<Value>();
+		in >> *value;
 		this->values.push_back(std::move(value));
 		if(in.eof()) {
 			throw std::runtime_error("Unterminated Array");

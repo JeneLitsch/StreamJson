@@ -15,7 +15,8 @@ void json::Object::readFromStream(std::istream & in) {
 		if(!match(in, ':')) {
 			throw std::runtime_error("Expected : between and value");
 		}
-		std::unique_ptr<Value> && value = std::make_unique<Value>(in);
+		std::unique_ptr<Value> && value = std::make_unique<Value>();
+		in >> *value;
 		this->dict.insert({key, std::move(value)});
 		if(in.eof()) {
 			throw std::runtime_error("Unterminated Object");

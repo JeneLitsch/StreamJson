@@ -4,6 +4,7 @@
 namespace json {
 	class Node {
 	public:
+		virtual ~Node() = default;
 		virtual void readFromStream(std::istream & in) = 0;
 		virtual void writeToStream(std::ostream & out) = 0;
 	protected:

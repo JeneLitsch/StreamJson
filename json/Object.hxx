@@ -5,6 +5,7 @@ namespace json {
 	class Value;
 	class Object : public Node {
 	public:
+		virtual ~Object() = default;
 		virtual void readFromStream(std::istream & in) override;
 		virtual void writeToStream(std::ostream & out) override;
 

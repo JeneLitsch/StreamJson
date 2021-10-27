@@ -3,10 +3,10 @@
 #include <fstream>
 #include <sstream>
 int main() {
-	std::stringstream ss{"{ \"a\" : 4, \"b\" : \"Hello World\" }"};
-	std::ifstream file("demo/test.json");
-	json::Object json;
-	file >> json;
-	std::cout << json << "\n";
+	std::ifstream ifile("demo/test.json");
+	std::ofstream ofile("demo/test2.json");
+	auto json = json::init();
+	ifile >> *json;
+	ofile << *json;
 	return 0;
 }

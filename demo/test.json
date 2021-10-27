@@ -1,3 +1,4 @@
 {
-	"a\t" : "\tHello\t\"World"
+	"a" : "Hello",
+	"b" : "World"
 }

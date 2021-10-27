@@ -7,16 +7,17 @@ namespace json {
 	class Array;
 	class Value : public Node {
 	public:
-		Value(std::istream & in);
+		Value(std::nullptr_t = nullptr);
 		Value(bool value);
 		Value(int value);
 		Value(long value);
 		Value(float value);
 		Value(double value);
 		Value(const std::string & value);
-		Value(std::nullptr_t);
 		Value(std::unique_ptr<Array> && value);
 		Value(std::unique_ptr<Object> && value);
+		
+		virtual ~Value() = default;
 
 		bool isNull() const;
 		bool getBool() const;

@@ -3,9 +3,6 @@
 #include "Object.hxx"
 #include <sstream>
 #include <iostream>
-json::Value::Value(std::istream & in){
-	in >> *this;
-}
 
 json::Value::Value(bool value){
 	this->value = value;
@@ -70,11 +67,15 @@ const json::Object & json::Value::getObject() const {
 void json::Value::readFromStream(std::istream & in) {
 	in >> std::ws;
 	if(check(in, '{')) {
-
+		auto && object = std::make_unique<Object>(); 
+		in >> *object; 
+		this->value = std::move(object); 
 	}
 	
 	else if(check(in, '[')) {
-		this->value = std::make_unique<Array>(in);
+		auto && array = std::make_unique<Array>(); 
+		in >> *array; 
+		this->value = std::move(array); 
 	}
 	
 	else if(in.peek() == '"') {
@@ -104,9 +105,6 @@ void json::Value::readFromStream(std::istream & in) {
 	}
 }
 
-std::string escape(std::string_view str) {
-
-}
 
 void json::Value::writeToStream(std::ostream & out) {
 	struct Vistor {
