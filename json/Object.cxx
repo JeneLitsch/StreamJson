@@ -37,7 +37,8 @@ void json::Object::writeToStream(std::ostream & out) {
 		else {
 			out << ", ";
 		}
-		out << "\"" << pair.first << "\" : " << *pair.second;
+		writeString(out, pair.first);
+		out << " : " << *pair.second;
 	}
 	out << "}";
 }

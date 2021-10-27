@@ -32,21 +32,17 @@ std::ostream & json::operator<<(std::ostream & out, Node & node) {
 	return out;
 }
 
-char escape(std::istream & in) {
-	in.ignore(); // ignore "\"
-	switch (in.get()) {
-	case '"':	return '"';
-	case '\\':	return '\\';
-	case 'n':	return '\n';
-	case 't':	return '\t';
-	default:
-		throw std::runtime_error("Invalid Escape sequence");
-	}
-}
-
 char nextChar(std::istream & in) {
 	if(in.peek() == '\\') {
-		return escape(in);
+		in.ignore(); // ignore "\"
+		switch (in.get()) {
+		case '"':	return '"';
+		case '\\':	return '\\';
+		case 'n':	return '\n';
+		case 't':	return '\t';
+		default:
+			throw std::runtime_error("Invalid Escape sequence");
+		}
 	}
 	return static_cast<char>(in.get());
 }
@@ -71,4 +67,18 @@ std::string json::readString(std::istream & in) {
 		ss << nextChar(in);
 	}
 	return ss.str();
+}
+
+void json::writeString(std::ostream & out, std::string_view str) {
+	out << "\"";
+	for(char chr : str) {
+		switch (chr) {
+		case '"':  	out << "\\\"";	break;
+		case '\\': 	out << "\\\\";	break;
+		case '\n': 	out << "\\n";	break;
+		case '\t': 	out << "\\t";	break;
+		default:	out << chr;		break;
+		}
+	}
+	out << "\"";
 }

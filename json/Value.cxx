@@ -104,6 +104,10 @@ void json::Value::readFromStream(std::istream & in) {
 	}
 }
 
+std::string escape(std::string_view str) {
+
+}
+
 void json::Value::writeToStream(std::ostream & out) {
 	struct Vistor {
 		void operator()(bool b) { 
@@ -115,7 +119,7 @@ void json::Value::writeToStream(std::ostream & out) {
 		}; 
 		
 		void operator()(const std::string & value) {
-			out << "\"" << value << "\"";
+			writeString(out, value);
 		};
 		
 		void operator()(const std::monostate &) {

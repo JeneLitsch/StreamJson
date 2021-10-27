@@ -12,6 +12,7 @@ namespace json {
 	bool match(std::istream & in, const std::string_view str);
 	bool check(std::istream & in, char chr);
 	std::string readString(std::istream & in);
+	void writeString(std::ostream & out, std::string_view str);
 	std::istream & operator>>(std::istream & in, Node & value);
 	std::ostream & operator<<(std::ostream & out, Node & value);
 }
