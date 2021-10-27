@@ -32,21 +32,43 @@ std::ostream & json::operator<<(std::ostream & out, Node & node) {
 	return out;
 }
 
+char escape(std::istream & in) {
+	in.ignore(); // ignore "\"
+	switch (in.get()) {
+	case '"':	return '"';
+	case '\\':	return '\\';
+	case 'n':	return '\n';
+	case 't':	return '\t';
+	default:
+		throw std::runtime_error("Invalid Escape sequence");
+	}
+}
+
+char nextChar(std::istream & in) {
+	if(in.peek() == '\\') {
+		return escape(in);
+	}
+	return static_cast<char>(in.get());
+}
+
 std::string json::readString(std::istream & in) {
 	if(!match(in, '"')) {
-		throw std::runtime_error("Missint \" before string");
+		throw std::runtime_error("Missing \" before string");
 	}
 	std::stringstream ss;
 	while(true) {
-		if(in.eof()) throw std::runtime_error("Unterminated String");
-		if(in.peek() == '"') {
+		
+		if(in.eof()) 
+			throw std::runtime_error("Unterminated String");
+		
+		if(in.peek() == '\n' || in.peek() == '\t')
+			throw std::runtime_error("Special character must be escapes");
+
+		else if(in.peek() == '"') {
 			in.ignore();
 			break;
 		}
-		if(in.peek() == '\\') {
-			in.ignore();
-		}
-		ss << static_cast<char>(in.get());
+		ss << nextChar(in);
 	}
 	return ss.str();
 }
