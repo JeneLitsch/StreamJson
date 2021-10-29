@@ -44,20 +44,21 @@ void json::Object::writeToStream(std::ostream & out) {
 	out << "}";
 }
 
-const json::Value & json::Object::get(const std::string_view key) const {
+const json::Node & json::Object::get(const std::string_view key) const {
 	return *this->dict.at(std::string(key));
 }
 
-json::Value & json::Object::get(const std::string_view key) {
+json::Node & json::Object::get(const std::string_view key) {
 	return *this->dict.at(std::string(key));
 }
 
 void json::Object::insert(
 	const std::string_view key,
-	std::unique_ptr<Value> && value) {
+	std::unique_ptr<Node> && value) {
 	this->dict.insert({std::string(key), std::move(value)});
 }
 
-bool json::Object::contains(const std::string_view key) const {
-	return this->dict.contains(std::string(key));
+void json::Object::insert(const std::string_view key, const std::string str) {
+	this->insert(key, std::make_unique<Value>(str));
 }
+

@@ -2,9 +2,15 @@
 #include "Value.hxx"
 
 namespace json {
-	class Serializable {
+	class Printable {
 	public:
-		virtual void readJson(const json::Value & value) = 0;
-		virtual std::unique_ptr<Value> writeJson() const = 0;
+		virtual std::unique_ptr<Node> toJson() const = 0;
 	};
+
+	class Readable {
+	public:
+		virtual void fromJson(const json::Node & value) = 0;
+	};
+
+	class Serializable : public Printable, public Readable {};
 }

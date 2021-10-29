@@ -41,10 +41,14 @@ void json::Array::writeToStream(std::ostream & out) {
 	out << "]";
 }
 
-const json::Value & json::Array::operator[](std::size_t idx) const {
+const json::Node & json::Array::operator[](std::size_t idx) const {
 	return *this->values[idx];
 }
 
 std::size_t json::Array::size() const {
 	return this->values.size();
+}
+
+void json::Array::push_back(std::unique_ptr<Node> && value) {
+	this->values.push_back(std::move(value));
 }
