@@ -14,11 +14,19 @@ namespace json {
 		Node & get(const std::string_view key);
 		
 		void insert(const std::string_view key, std::unique_ptr<Node> && value);
-		void insert(const std::string_view key, const std::string str);
+		void insert(const std::string_view key, const char * str);
+		void insert(const std::string_view key, const std::string & str);
+		void insert(const std::string_view key, const std::string_view & str);
+		void insert(const std::string_view key, const double number);
+		void insert(const std::string_view key, const bool value);
 		
 		bool contains(const std::string_view key) const; 
 	
 	private:
 		std::unordered_map<std::string, std::unique_ptr<Node>> dict;
 	};
+
+	inline std::string str(const std::string_view str) {
+		return std::string(str);
+	}
 }
