@@ -48,42 +48,14 @@ const json::Node & json::Object::get(const std::string_view key) const {
 	return *this->dict.at(std::string(key));
 }
 
-json::Node & json::Object::get(const std::string_view key) {
-	return *this->dict.at(std::string(key));
-}
-
 void json::Object::insert(
 	const std::string_view key,
 	std::unique_ptr<Node> && value) {
 	this->dict.insert({std::string(key), std::move(value)});
 }
 
-void json::Object::insert(
-	const std::string_view key,
-	const char * str) {
-	this->insert(key, std::string(str));
-}
 
-void json::Object::insert(
-	const std::string_view key,
-	const std::string & str) {
-	this->insert(key, std::make_unique<Value>(str));
-}
 
-void json::Object::insert(
-	const std::string_view key,
-	const std::string_view & str) {
-	this->insert(key, std::string(str));
-}
 
-void json::Object::insert(
-	const std::string_view key,
-	const double number) {
-	this->insert(key, std::make_unique<Value>(number));
-}
 
-void json::Object::insert(
-	const std::string_view key,
-	const bool value) {
-	this->insert(key, std::make_unique<Value>(value));
-}
+

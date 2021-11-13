@@ -3,22 +3,15 @@
 #include <vector>
 namespace json {
 	class Value;
+	class Object;
 	class Array : public Node {
 	public:
 		Array() = default;
 		virtual ~Array() = default;
 
-		// C++ API
-		const Node & operator[](std::size_t idx) const;
-		std::size_t size() const;
-		auto begin() { return this->values.begin(); }
-		auto end() { return this->values.end(); }
-		auto begin() const { return this->values.begin(); }
-		auto cbegin() const { return this->values.cbegin(); }
-		auto end() const { return this->values.end(); }
-		auto cend() const { return this->values.cend(); }
-
+		const Node & get(std::size_t idx) const;
 		void push_back(std::unique_ptr<Node> && value);
+		std::size_t size() const;
 
 		// JSON 
 		virtual void readFromStream(std::istream & in) override;
