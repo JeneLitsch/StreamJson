@@ -38,6 +38,7 @@ char nextChar(std::istream & in) {
 		switch (in.get()) {
 		case '"':	return '"';
 		case '\\':	return '\\';
+		case '/':	return '/';
 		case 'n':	return '\n';
 		case 't':	return '\t';
 		default:
