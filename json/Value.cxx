@@ -82,7 +82,7 @@ void json::Value::readFromStream(std::istream & in) {
 		this->value = readString(in);
 	}
 	
-	else if(std::isdigit(in.peek()) || match(in, '-') || match(in, '-')) {
+	else if(std::isdigit(in.peek()) || check(in, '-')) {
 		double number;
 		in >> number;
 		this->value = number;
@@ -106,7 +106,7 @@ void json::Value::readFromStream(std::istream & in) {
 }
 
 
-void json::Value::writeToStream(std::ostream & out) {
+void json::Value::writeToStream(std::ostream & out) const {
 	struct Vistor {
 		void operator()(bool b) { 
 			out << std::boolalpha << b;

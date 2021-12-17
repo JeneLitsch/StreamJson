@@ -18,6 +18,8 @@ namespace json {
 		Value(std::unique_ptr<Object> && value);
 		
 		virtual ~Value() = default;
+		Value(const Value &) = delete;
+		Value(Value &&) = default;
 
 		bool isNull() const;
 		bool getBool() const;
@@ -27,7 +29,7 @@ namespace json {
 		const Object & getObject() const;
 
 		virtual void readFromStream(std::istream & in) override;
-		virtual void writeToStream(std::ostream & out) override;
+		virtual void writeToStream(std::ostream & out) const override;
 
 	private:
 		std::variant<

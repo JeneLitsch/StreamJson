@@ -8,24 +8,52 @@ namespace json::insert {
 		Object & obj,
 		const std::string_view key,
 		const std::string_view str);
+
+	void string(
+		Array & arr,
+		const std::string_view str);
 	
+
+
 	void number(
 		Object & obj,
 		const std::string_view key,
 		const double number);
 	
+	void number(
+		Array & arr,
+		const double number);
+
+
+
 	void boolean(
 		Object & obj,
 		const std::string_view key,
 		const bool value);
 	
+	void boolean(
+		Array & arr,
+		const bool value);
+
+
+
 	void array(
 		Object & obj,
 		const std::string_view key,
-		std::unique_ptr<Array> && array);
+		Array && array);
 	
+	void array(
+		Array & arr,
+		Array && array);
+
+
+
 	void object(
 		Object & obj,
 		const std::string_view key,
-		std::unique_ptr<Object> && object);
+		Object && object);
+
+	void object(
+		Array & arr,
+		Object && object);	
 }

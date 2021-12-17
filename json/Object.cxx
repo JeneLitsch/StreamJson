@@ -28,7 +28,7 @@ void json::Object::readFromStream(std::istream & in) {
 	}
 }
 
-void json::Object::writeToStream(std::ostream & out) {
+void json::Object::writeToStream(std::ostream & out) const {
 	out << "{";
 	bool first = true;
 	for(const auto & pair : this->dict) {

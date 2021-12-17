@@ -7,8 +7,10 @@ namespace json {
 	class Object : public Node {
 	public:
 		virtual ~Object() = default;
+		Object() = default;
+		Object(Object &&) = default;
 		virtual void readFromStream(std::istream & in) override;
-		virtual void writeToStream(std::ostream & out) override;
+		virtual void writeToStream(std::ostream & out) const override;
 
 		const Node & get(const std::string_view key) const;
 		bool contains(const std::string_view key) const;

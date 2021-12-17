@@ -27,7 +27,7 @@ std::istream & json::operator>>(std::istream & in, Node & node) {
 }
 
 
-std::ostream & json::operator<<(std::ostream & out, Node & node) {
+std::ostream & json::operator<<(std::ostream & out, const Node & node) {
 	node.writeToStream(out);
 	return out;
 }

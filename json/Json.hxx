@@ -8,5 +8,4 @@
 #include "insert.hxx"
 
 namespace json {
-	std::unique_ptr<Value> init();
 }

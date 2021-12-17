@@ -26,7 +26,7 @@ void json::Array::readFromStream(std::istream & in) {
 	}
 }
 
-void json::Array::writeToStream(std::ostream & out) {
+void json::Array::writeToStream(std::ostream & out) const {
 	out << "[";
 	bool first = true;
 	for(const auto & element : this->values) {
