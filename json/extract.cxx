@@ -3,7 +3,7 @@
 namespace {
 
 	const json::Value & getValue(const auto & node, auto at, auto errorMSG) {
-		const auto * value =  dynamic_cast<const json::Value *>(&node.get(at));
+		const auto * value = dynamic_cast<const json::Value *>(&node.get(at));
 		if(value) {
 			return *value;
 		}

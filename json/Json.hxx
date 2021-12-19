@@ -5,6 +5,7 @@
 #include "Value.hxx"
 #include "Serializable.hxx"
 #include "extract.hxx"
+#include "lookup.hxx"
 #include "insert.hxx"
 
 namespace json {

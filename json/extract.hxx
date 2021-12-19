@@ -1,4 +1,5 @@
 #pragma once
+#include <optional>
 #include "Object.hxx"
 #include "Array.hxx"
 #include "Value.hxx"

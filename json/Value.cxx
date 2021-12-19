@@ -64,6 +64,7 @@ const json::Object & json::Value::getObject() const {
 	return *std::get<std::unique_ptr<Object>>(this->value);
 }
 
+
 void json::Value::readFromStream(std::istream & in) {
 	in >> std::ws;
 	if(check(in, '{')) {
