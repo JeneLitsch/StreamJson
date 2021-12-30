@@ -42,6 +42,9 @@ void json::Array::writeToStream(std::ostream & out) const {
 }
 
 const json::Node & json::Array::get(std::size_t idx) const {
+	if(idx >= this->size()) {
+		throw std::out_of_range("");
+	}
 	return *this->values[idx];
 }
 
